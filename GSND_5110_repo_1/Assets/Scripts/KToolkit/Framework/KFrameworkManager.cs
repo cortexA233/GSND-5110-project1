@@ -8,8 +8,6 @@ namespace KToolkit
 {
     public class KFrameworkManager : KSingleton<KFrameworkManager>
     {
-        private GameObject frameworkManagerObject;
-    
         protected override void Awake()
         {
             base.Awake();
@@ -17,7 +15,6 @@ namespace KToolkit
 
         public virtual void InitKFramework()
         {
-            
             KUIManager.instance.Init();
         }
 
