@@ -100,4 +100,6 @@ InitTestScene*.unity*
 Library
 Logs
 Temp
+obj
 UserSettings
+.idea
