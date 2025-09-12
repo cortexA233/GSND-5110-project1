@@ -7,6 +7,11 @@ public class GameManager : KSingleton<GameManager>
     {
         base.Awake();
         KFrameworkManager.instance.InitKFramework();
+        AddEventListener(KEventName.KToolTestEvent, args =>
+        {
+            print("!!!open mini game");
+        });
+        // GameManager.instance.OpenMinigame(param1, param2);;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

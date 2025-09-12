@@ -12,7 +12,6 @@ namespace KToolkit
         static KDebugLogger()
         {
             InitDebuggerConfig();
-            debuggerConfig["UI"] = true;
         }
         
         private static void InitDebuggerConfig()
@@ -23,7 +22,7 @@ namespace KToolkit
             debuggerConfig["Player"] = true;
             debuggerConfig["Level"] = true;
         
-            debuggerConfig["Cortex"] = true;
+            debuggerConfig["Example"] = true;
             debuggerConfig["Veyo"] = false;
             debuggerConfig["Shin"] = true;
         }
