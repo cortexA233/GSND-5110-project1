@@ -12,6 +12,7 @@ public class GameManager : KSingleton<GameManager>
             print("!!!open mini game");
         });
         // GameManager.instance.OpenMinigame(param1, param2);;;;;
+        // 1122
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
