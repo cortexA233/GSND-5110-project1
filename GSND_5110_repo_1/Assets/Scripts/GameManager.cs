@@ -18,6 +18,18 @@ public class GameManager : KSingleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (KUIManager.instance.GetFirstUIWithType<GMPage>() is null) 
+            {
+                KUIManager.instance.CreateUI<GMPage>();   
+            }
+            else
+            {
+                KUIManager.instance.DestroyAllUIWithType<GMPage>();
+            }
+        }
+        #endif
     }
 }
