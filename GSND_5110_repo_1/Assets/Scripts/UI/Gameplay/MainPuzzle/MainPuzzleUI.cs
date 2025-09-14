@@ -69,6 +69,10 @@ public class MainPuzzleUI : KUIBase
                 {
                     checkList[newPair.Item1] = true;
                 }
+                else
+                {
+                    checkList[newPair.Item1] = false;
+                }
 
                 if (lineDict.ContainsKey(newPair.Item1))
                 {
@@ -77,6 +81,7 @@ public class MainPuzzleUI : KUIBase
                 }
                 lineDict[newPair.Item1] = DrawLine(currentLeftIndex, (int)args[0]);
                 RefreshAnswersCount();
+                currentLeftIndex = -1;
             }
         });
         AddEventListener(KEventName.MainPuzzleCancelConnection, args =>
@@ -96,6 +101,10 @@ public class MainPuzzleUI : KUIBase
             }
         }
         errorCountText.text = errorCount + " ERRORS LEFT";
+        if (errorCount <= 0)
+        {
+            // todo: victory logic
+        }
     }
 
     GameObject DrawLine(int startIndex, int endIndex)
