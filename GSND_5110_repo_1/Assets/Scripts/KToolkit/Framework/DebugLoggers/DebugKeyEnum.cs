@@ -22,7 +22,7 @@ namespace KToolkit
             debuggerConfig["Player"] = true;
             debuggerConfig["Level"] = true;
         
-            debuggerConfig["Example"] = true;
+            debuggerConfig["Cortex"] = true;
             debuggerConfig["Veyo"] = false;
             debuggerConfig["Shin"] = true;
         }

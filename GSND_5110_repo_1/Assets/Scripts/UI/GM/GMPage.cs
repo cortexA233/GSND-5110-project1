@@ -46,6 +46,16 @@ public class GMPage : KUIBase
             }
             KDebugLogger.Example_DebugLog(res);
         });
+        
+        allFuncs.Add("open main puzzle", () =>
+        {
+            int.TryParse(inputArg_1, out int pairCount);
+            if (pairCount <= 0)
+            {
+                pairCount = 5;
+            }
+            GameManager.instance.OpenNewMainPuzzle(pairCount);
+        });
     }
 
     void GenerateAllFuncs()

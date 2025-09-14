@@ -38,4 +38,13 @@ public class GameManager : KSingleton<GameManager>
         }
         #endif
     }
+
+    #region public
+
+    public void OpenNewMainPuzzle(int pairCount=5)
+    {
+        KUIManager.instance.CreateUI<MainPuzzleUI>(pairCount);
+    }
+
+    #endregion
 }
