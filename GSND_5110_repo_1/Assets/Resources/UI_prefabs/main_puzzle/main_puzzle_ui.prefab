@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Right: 22
     m_Top: 11
     m_Bottom: 11
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_Spacing: 11
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 5484119535489750593}
   - component: {fileID: 6394534711281208513}
   m_Layer: 5
-  m_Name: wrong_count
+  m_Name: error_count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

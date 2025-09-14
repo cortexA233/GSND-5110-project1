@@ -132,13 +132,13 @@ namespace KToolkit
             }
         }
         
-        public KUIBase GetFirstUIWithType<T>() where T : KUIBase
+        public T GetFirstUIWithType<T>() where T : KUIBase
         {
             for (int i = uiList.Count - 1; i >= 0; i--)
             {
                 if (uiList[i].GetType() == typeof(T))
                 {
-                    return uiList[i];
+                    return (T)uiList[i];
                 }
             }
             return null;

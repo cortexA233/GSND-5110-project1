@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using KToolkit;
+using TMPro;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -12,69 +13,120 @@ public class MainPuzzleUI : KUIBase
     private int pairCount;
     private Transform nodeRoot;
     private Transform lineRoot;
+    TMP_Text errorCountText;
     
     int errorCount;
     List<bool> checkList = new List<bool>();
+    List<int> answersList = new List<int>();
     List<MainPuzzleCell> puzzleCells = new List<MainPuzzleCell>();
-    private Dictionary<Tuple<int, int>, GameObject> lineDict;
+    private Dictionary<int, GameObject> lineDict = new Dictionary<int, GameObject>();
+    private int currentLeftIndex = -1;
     
     public override void InitParams(params object[] args)
     {
         base.InitParams(args);
         pairCount = (int)args[0];
         
-        AddEventListener(KEventName.MainPuzzleBeginConnection, args =>
-        {
-            
-        });
-        AddEventListener(KEventName.MainPuzzleEndConnection, args =>
-        {
-            // if()
-        });
-        
         nodeRoot = transform.Find("node_pair_root");
         lineRoot = transform.Find("line_root");
-        List<int> answersList = new List<int>();
+        errorCountText = transform.Find("error_count").GetComponent<TMP_Text>();
         for (int i = 0; i < pairCount; i++)
         {
             answersList.Add(i);
+            checkList.Add(false);
         }
 
         for (int i = 0; i < answersList.Count; i++)
         {
             int lastIndex = answersList.Count - i - 1;
             int randIndex = Random.Range(0, lastIndex);
-            // int temp = answersList[randIndex];
-            // answersList[randIndex] = answersList[lastIndex];
-            // answersList[lastIndex] = temp;
             (answersList[randIndex], answersList[lastIndex]) = (answersList[lastIndex], answersList[randIndex]);
         }
 
         for (int i = 0; i < pairCount; i++)
         {
-            KDebugLogger.Cortex_DebugLog("ans is: ", answersList[i]);
-            puzzleCells.Add(CreateUICell<MainPuzzleCell>(nodeRoot, answersList[i]));
+            puzzleCells.Add(CreateUICell<MainPuzzleCell>(nodeRoot, i));
         }
+        RefreshAnswersCount();
     }
-    
-    void DrawLine(int startIndex, int endIndex)
+
+    public override void OnStart()
+    {
+        base.OnStart();
+        
+        AddEventListener(KEventName.MainPuzzleBeginConnection, args =>
+        {
+            currentLeftIndex = (int)args[0];
+            KDebugLogger.Cortex_DebugLog("begin connect", currentLeftIndex);
+        });
+        AddEventListener(KEventName.MainPuzzleEndConnection, args =>
+        {
+            if (currentLeftIndex >= 0)
+            {
+                KDebugLogger.Cortex_DebugLog("end connect", (int)args[0]);
+                var newPair = new Tuple<int, int>(currentLeftIndex, (int)args[0]);
+                if (answersList[newPair.Item1] == newPair.Item2)
+                {
+                    checkList[newPair.Item1] = true;
+                }
+
+                if (lineDict.ContainsKey(newPair.Item1))
+                {
+                    GameObject.Destroy(lineDict[newPair.Item1]);
+                    lineDict.Remove(newPair.Item1);
+                }
+                lineDict[newPair.Item1] = DrawLine(currentLeftIndex, (int)args[0]);
+                RefreshAnswersCount();
+            }
+        });
+        AddEventListener(KEventName.MainPuzzleCancelConnection, args =>
+        {
+            currentLeftIndex = -1;
+        });
+    }
+
+    void RefreshAnswersCount()
+    {
+        errorCount = pairCount;
+        foreach (var item in checkList)
+        {
+            if (item)
+            {
+                errorCount--;
+            }
+        }
+        errorCountText.text = errorCount + " ERRORS LEFT";
+    }
+
+    GameObject DrawLine(int startIndex, int endIndex)
     {
         GameObject line = new GameObject("line_" + startIndex + "_" + endIndex, typeof(Image));
         line.transform.SetParent(lineRoot, false);
         Image img = line.GetComponent<Image>();
-        img.color = Color.white; // 可修改颜色
+        img.color = Color.red; // line color
 
         RectTransform rt = line.GetComponent<RectTransform>();
-        Vector3 start = lineRoot.GetChild(startIndex).position;
-        Vector3 end = lineRoot.GetChild(endIndex).position;
+        Vector3 start = nodeRoot.GetChild(startIndex).Find("left_node").position;
+        Vector3 end = nodeRoot.GetChild(endIndex).Find("right_node").position;
         Vector3 dir = (end - start).normalized;
         float distance = Vector3.Distance(start, end);
 
-        rt.sizeDelta = new Vector2(distance, 5f); // 线的宽度 = 5
-        rt.pivot = new Vector2(0, 0.5f); // 让左边当作起点
+        rt.sizeDelta = new Vector2(distance, 5f); // line width = 5
+        rt.pivot = new Vector2(0, 0.5f); // start point is left
         rt.position = start;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         rt.rotation = Quaternion.Euler(0, 0, angle);
+        return line;
+    }
+
+    public void PrintAnswers()
+    {
+        string ansStr = "";
+        foreach (var item in answersList)
+        {
+            ansStr += item + " ";
+        }
+        KDebugLogger.Cortex_DebugLog("answer is:", ansStr);
     }
 
 }

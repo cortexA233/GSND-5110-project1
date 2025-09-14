@@ -56,6 +56,12 @@ public class GMPage : KUIBase
             }
             GameManager.instance.OpenNewMainPuzzle(pairCount);
         });
+        
+        allFuncs.Add("print main puzzle answer", () =>
+        {
+            MainPuzzleUI puzzle = KUIManager.instance.GetFirstUIWithType<MainPuzzleUI>();
+            puzzle.PrintAnswers();
+        });
     }
 
     void GenerateAllFuncs()
