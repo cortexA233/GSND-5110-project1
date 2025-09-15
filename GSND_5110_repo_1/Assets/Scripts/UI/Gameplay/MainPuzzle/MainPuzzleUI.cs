@@ -14,6 +14,7 @@ public class MainPuzzleUI : KUIBase
     private Transform nodeRoot;
     private Transform lineRoot;
     TMP_Text errorCountText;
+    TMP_Text countDownText;
     
     int errorCount;
     List<bool> checkList = new List<bool>();
@@ -30,6 +31,7 @@ public class MainPuzzleUI : KUIBase
         nodeRoot = transform.Find("node_pair_root");
         lineRoot = transform.Find("line_root");
         errorCountText = transform.Find("error_count").GetComponent<TMP_Text>();
+        countDownText = transform.Find("countdown_text").GetComponent<TMP_Text>();
         for (int i = 0; i < pairCount; i++)
         {
             answersList.Add(i);
@@ -48,6 +50,11 @@ public class MainPuzzleUI : KUIBase
             puzzleCells.Add(CreateUICell<MainPuzzleCell>(nodeRoot, i));
         }
         RefreshAnswersCount();
+        
+        transform.Find("node_pair_root").GetComponent<Button>().onClick.AddListener((() =>
+        {
+            KEventManager.SendNotification(KEventName.MainPuzzleCancelConnection);
+        }));
     }
 
     public override void OnStart()
@@ -90,6 +97,12 @@ public class MainPuzzleUI : KUIBase
         });
     }
 
+    public override void Update()
+    {
+        base.Update();
+        SetCountDownText();
+    }
+
     void RefreshAnswersCount()
     {
         errorCount = pairCount;
@@ -104,7 +117,17 @@ public class MainPuzzleUI : KUIBase
         if (errorCount <= 0)
         {
             // todo: victory logic
+            KEventManager.SendNotification(KEventName.AllConnectionSucceed);
         }
+    }
+    
+    void SetCountDownText()
+    {
+        float displayTime = CountDownManager.instance.currentCountDownTime;
+        int timeInteger = (int)(displayTime);
+        float timeFloat = displayTime - timeInteger;
+        var tempTimeFloat = timeFloat.ToString("F2").Split('.')[1];
+        countDownText.text = string.Format("{0} : {1}", timeInteger.ToString("00"), tempTimeFloat);
     }
 
     GameObject DrawLine(int startIndex, int endIndex)

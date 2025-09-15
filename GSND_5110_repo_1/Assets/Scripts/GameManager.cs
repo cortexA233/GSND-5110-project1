@@ -3,6 +3,7 @@ using KToolkit;
 
 public class GameManager : KSingleton<GameManager>
 {
+    bool isGameStarted = false;
     protected override void Awake()
     {
         base.Awake();
@@ -11,8 +12,15 @@ public class GameManager : KSingleton<GameManager>
         {
             print("!!!open mini game");
         });
-        // GameManager.instance.OpenMinigame(param1, param2);;;;;
-        // 1122
+        
+        AddEventListener(KEventName.CountDownEnd, args =>
+        {
+            EndCurrentGame(false);
+        });
+        AddEventListener(KEventName.AllConnectionSucceed, args =>
+        {
+            EndCurrentGame(true);
+        });
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,13 +45,26 @@ public class GameManager : KSingleton<GameManager>
             }
         }
         #endif
+        CountDownManager.instance.UpdateCountDown();
     }
 
     #region public
 
-    public void OpenNewMainPuzzle(int pairCount=5)
+    public void StartNewGame(int pairCount=8)
     {
+        CountDownManager.instance.StartCountDown();
         KUIManager.instance.CreateUI<MainPuzzleUI>(pairCount);
+    }
+
+    public void EndCurrentGame(bool isSuccess=false)
+    {
+        // todo
+        KUIManager.instance.DestroyAllUIWithType<MainPuzzleUI>();
+    }
+
+    public SO_GameConfig GetGameConfig()
+    {
+        return Resources.Load<SO_GameConfig>("game_config");
     }
 
     #endregion
