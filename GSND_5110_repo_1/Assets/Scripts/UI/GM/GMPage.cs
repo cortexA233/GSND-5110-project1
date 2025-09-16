@@ -67,6 +67,16 @@ public class GMPage : KUIBase
             MainPuzzleUI puzzle = KUIManager.instance.GetFirstUIWithType<MainPuzzleUI>();
             puzzle.PrintAnswers();
         });
+        
+        allFuncs.Add("hide countdown", () =>
+        {
+            KEventManager.SendNotification(KEventName.ShowCountDownTextNotification, false);
+        });
+        
+        allFuncs.Add("show countdown", () =>
+        {
+            KEventManager.SendNotification(KEventName.ShowCountDownTextNotification, true);
+        });
     }
 
     void GenerateAllFuncs()

@@ -8,4 +8,6 @@ public enum KEventName
     CountDownEnd,      // triggered when time's up.
     
     AllConnectionSucceed,       // triggered when there's no error in main puzzle
+    
+    ShowCountDownTextNotification,      // Notify the main puzzle to hide the countdown text. param: isVisible(bool)
 }

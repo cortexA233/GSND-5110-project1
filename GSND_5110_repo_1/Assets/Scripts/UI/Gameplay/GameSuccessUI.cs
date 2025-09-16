@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+[KUI_Info("game_success_ui", "GameSuccessUI")]
 public class GameSuccessUI : KUIBase
 {
     public override void InitParams(params object[] args)
