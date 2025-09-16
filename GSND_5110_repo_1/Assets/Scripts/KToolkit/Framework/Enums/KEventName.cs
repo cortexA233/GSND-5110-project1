@@ -11,5 +11,7 @@ public enum KEventName
     
     ShowCountDownTextNotification,      // Notify the main puzzle to hide the countdown text. param: isVisible(bool)
     
+    ShowMainPuzzle,         // Notify the main puzzle to hide itself. param: isVisible(bool)
+    
     MiniGameEnd,            // param:isSuccess(bool), finalScore(int)
 }

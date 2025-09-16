@@ -6,6 +6,7 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
 {
     public float currentCountDownTime { get; private set; } = 0;
     private bool isPause = true;
+    private float minigameStartTimer;
     
     public CountDownManager()
     {
@@ -13,6 +14,7 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
 
     public void StartCountDown()
     {
+        minigameStartTimer = GameManager.instance.GetGameConfig().minigameTriggerFrequency;
         currentCountDownTime = GameManager.instance.GetGameConfig().countDownTime;
         isPause = false;
     }
@@ -32,12 +34,20 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
         if (currentCountDownTime > 0)
         {
             currentCountDownTime -= Time.deltaTime;
+            minigameStartTimer -= Time.deltaTime;
         }
         else
         {
             isPause = true;
             currentCountDownTime = 0;
             KEventManager.SendNotification(KEventName.CountDownEnd);
+        }
+
+        if (minigameStartTimer <= 0)
+        {
+            minigameStartTimer = GameManager.instance.GetGameConfig().minigameTriggerFrequency;
+            KEventManager.SendNotification(KEventName.ShowMainPuzzle, false);
+            GameManager.instance.StartBallonMiniGame();
         }
     }
     

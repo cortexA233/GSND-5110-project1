@@ -56,6 +56,10 @@ public class GameManager : KSingleton<GameManager>
         KUIManager.instance.CreateUI<MainPuzzleUI>(pairCount);
     }
 
+    public void StartBallonMiniGame(){
+        Instantiate(Resources.Load<GameObject>("Balloon_game_prefab/mini_game"));
+    }
+
     public void EndCurrentGame(bool isSuccess=false)
     {
         // todo

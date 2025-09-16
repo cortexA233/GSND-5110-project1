@@ -2,6 +2,8 @@ using Minigame.BalloonGame;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using KToolkit;
+
 
 namespace Minigame.BallonGame
 {
@@ -15,6 +17,7 @@ namespace Minigame.BallonGame
         public GameObject gameOverUI; // optional: panel to show end results
 
         [Header("Game settings")] public int startingLives = 2;
+        // just give default value
         public float roundTime = 20f;
         public string returnSceneName = "MainPuzzle";
 
@@ -38,6 +41,7 @@ namespace Minigame.BallonGame
             lives = startingLives;
             timeLeft = roundTime;
             UpdateUI();
+            // get the round time from game config
             roundTime = GameManager.instance.GetGameConfig().minigameCountdownTime;
             if (gameOverUI) gameOverUI.SetActive(false);
         }
@@ -95,6 +99,16 @@ namespace Minigame.BallonGame
 
             // show Game Over UI if set
             if (gameOverUI) gameOverUI.SetActive(true);
+            
+            // show the main puzzle
+            KEventManager.SendNotification(KEventName.ShowMainPuzzle, true);
+            
+            // calculate the score and add extra time
+            CountDownManager.instance.ChangeCountDownTime(score * GameManager.instance.GetGameConfig()
+                .scoreToExtraTimeRatio);
+            
+            // destroy the root prefab
+            GameObject.Destroy(transform.parent.gameObject);
         }
 
         // Hook this to GameOver button to return to main puzzle

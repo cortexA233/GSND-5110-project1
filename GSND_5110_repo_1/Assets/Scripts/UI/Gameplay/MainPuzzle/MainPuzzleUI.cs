@@ -99,6 +99,10 @@ public class MainPuzzleUI : KUIBase
         {
             countDownText.gameObject.SetActive((bool)args[0]);
         });
+        AddEventListener(KEventName.ShowMainPuzzle, args =>
+        {
+            gameObject.SetActive((bool)args[0]);
+        });
     }
 
     public override void Update()
