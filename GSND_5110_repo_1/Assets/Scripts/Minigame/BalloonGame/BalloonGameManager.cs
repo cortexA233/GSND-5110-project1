@@ -38,7 +38,7 @@ namespace Minigame.BallonGame
             lives = startingLives;
             timeLeft = roundTime;
             UpdateUI();
-
+            roundTime = GameManager.instance.GetGameConfig().minigameCountdownTime;
             if (gameOverUI) gameOverUI.SetActive(false);
         }
 

@@ -57,11 +57,6 @@ public class GMPage : KUIBase
             GameManager.instance.StartNewGame(pairCount);
         });
         
-        allFuncs.Add("start mini game", () =>
-        {
-            // Minigame.Balloon_Game.BalloonGameManager.Instance.
-        });
-        
         allFuncs.Add("print main puzzle answer", () =>
         {
             MainPuzzleUI puzzle = KUIManager.instance.GetFirstUIWithType<MainPuzzleUI>();
