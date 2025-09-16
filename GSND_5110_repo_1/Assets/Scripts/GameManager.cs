@@ -59,7 +59,20 @@ public class GameManager : KSingleton<GameManager>
     public void EndCurrentGame(bool isSuccess=false)
     {
         // todo
+        if (isSuccess)
+        {
+            KUIManager.instance.CreateUI<GameSuccessUI>();
+        }
+        else
+        {
+            KUIManager.instance.CreateUI<GameOverUI>();
+        }
         KUIManager.instance.DestroyAllUIWithType<MainPuzzleUI>();
+    }
+
+    public void BackToMainMenu()
+    {
+        // todo
     }
 
     public SO_GameConfig GetGameConfig()
