@@ -95,6 +95,10 @@ public class MainPuzzleUI : KUIBase
         {
             currentLeftIndex = -1;
         });
+        AddEventListener(KEventName.ShowCountDownTextNotification, args =>
+        {
+            countDownText.gameObject.SetActive((bool)args[0]);
+        });
     }
 
     public override void Update()
