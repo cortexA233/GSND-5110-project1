@@ -10,4 +10,6 @@ public enum KEventName
     AllConnectionSucceed,       // triggered when there's no error in main puzzle
     
     ShowCountDownTextNotification,      // Notify the main puzzle to hide the countdown text. param: isVisible(bool)
+    
+    MiniGameEnd,            // param:isSuccess(bool), finalScore(int)
 }

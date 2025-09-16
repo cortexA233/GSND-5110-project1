@@ -77,6 +77,17 @@ public class GMPage : KUIBase
         {
             KEventManager.SendNotification(KEventName.ShowCountDownTextNotification, true);
         });
+        
+        allFuncs.Add("open ballon game", () =>
+        {
+            GameObject.Instantiate(Resources.Load<GameObject>("Balloon_game_prefab/mini_game"));
+            KEventManager.SendNotification(KEventName.ShowCountDownTextNotification, true);
+        });
+        
+        allFuncs.Add("Add Extra time", () =>
+        {
+            CountDownManager.instance.ChangeCountDownTime(5f);
+        });
     }
 
     void GenerateAllFuncs()

@@ -41,4 +41,8 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
         }
     }
     
+    public void ChangeCountDownTime(float time)
+    {
+        currentCountDownTime += time;
+    }
 }
