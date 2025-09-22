@@ -82,6 +82,16 @@ public class GMPage : KUIBase
         {
             CountDownManager.instance.ChangeCountDownTime(5f);
         });
+        
+        allFuncs.Add("Disable blur", () =>
+        {
+            GameManager.instance.EnablePostProcess(false);
+        });
+        
+        allFuncs.Add("Enable blur", () =>
+        {
+            GameManager.instance.EnablePostProcess(true);
+        });
     }
 
     void GenerateAllFuncs()

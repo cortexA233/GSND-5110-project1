@@ -49,6 +49,15 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
             KEventManager.SendNotification(KEventName.ShowMainPuzzle, false);
             GameManager.instance.StartBallonMiniGame();
         }
+
+        SetPostProcessByCountDownTime();
+    }
+
+    void SetPostProcessByCountDownTime()
+    {
+        float countDownMaxLimit = GameManager.instance.GetGameConfig().countDownTime;
+        float glitchValue = (countDownMaxLimit - currentCountDownTime) / countDownMaxLimit * 0.7f + 0.01f;
+        GameManager.instance.SetPostProcessValue(glitchValue);
     }
     
     public void ChangeCountDownTime(float time)

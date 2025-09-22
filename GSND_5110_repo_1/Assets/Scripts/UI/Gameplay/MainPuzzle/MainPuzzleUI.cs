@@ -64,13 +64,13 @@ public class MainPuzzleUI : KUIBase
         AddEventListener(KEventName.MainPuzzleBeginConnection, args =>
         {
             currentLeftIndex = (int)args[0];
-            KDebugLogger.Cortex_DebugLog("begin connect", currentLeftIndex);
+            // KDebugLogger.Cortex_DebugLog("begin connect", currentLeftIndex);
         });
         AddEventListener(KEventName.MainPuzzleEndConnection, args =>
         {
             if (currentLeftIndex >= 0)
             {
-                KDebugLogger.Cortex_DebugLog("end connect", (int)args[0]);
+                // KDebugLogger.Cortex_DebugLog("end connect", (int)args[0]);
                 var newPair = new Tuple<int, int>(currentLeftIndex, (int)args[0]);
                 if (answersList[newPair.Item1] == newPair.Item2)
                 {
@@ -146,14 +146,24 @@ public class MainPuzzleUI : KUIBase
         img.color = Color.red; // line color
 
         RectTransform rt = line.GetComponent<RectTransform>();
-        Vector3 start = nodeRoot.GetChild(startIndex).Find("left_node").position;
-        Vector3 end = nodeRoot.GetChild(endIndex).Find("right_node").position;
+        Vector3 start = nodeRoot.GetChild(startIndex).Find("left_node").GetComponent<RectTransform>().position;
+        Vector3 end = nodeRoot.GetChild(endIndex).Find("right_node").GetComponent<RectTransform>().position;
+        
+        // float distance = Vector3.Distance(start, end);
+        start = RectTransformUtility.WorldToScreenPoint(Camera.main, start);
+        end = RectTransformUtility.WorldToScreenPoint(Camera.main, end);
         Vector3 dir = (end - start).normalized;
         float distance = Vector3.Distance(start, end);
+        KDebugLogger.Cortex_DebugLog(distance,
+            start, end, "!!!!",
+            nodeRoot.GetChild(endIndex).Find("right_node").GetComponent<RectTransform>().position,
+            nodeRoot.GetChild(startIndex).Find("left_node").GetComponent<RectTransform>().position);
 
         rt.sizeDelta = new Vector2(distance, 5f); // line width = 5
         rt.pivot = new Vector2(0, 0.5f); // start point is left
-        rt.position = start;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            KUIManager.instance.GetCanvas().GetComponent<RectTransform>(), start, Camera.main, out Vector3 rtPos);
+        rt.position = rtPos;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         rt.rotation = Quaternion.Euler(0, 0, angle);
         return line;

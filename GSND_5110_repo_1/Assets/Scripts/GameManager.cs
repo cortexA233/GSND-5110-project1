@@ -52,6 +52,7 @@ public class GameManager : KSingleton<GameManager>
 
     public void StartNewGame(int pairCount=8)
     {
+        EnablePostProcess(true);
         CountDownManager.instance.StartCountDown();
         KUIManager.instance.CreateUI<MainPuzzleUI>(pairCount);
     }
@@ -63,6 +64,7 @@ public class GameManager : KSingleton<GameManager>
     public void EndCurrentGame(bool isSuccess=false)
     {
         // todo
+        EnablePostProcess(false);
         if (isSuccess)
         {
             KUIManager.instance.CreateUI<GameSuccessUI>();
@@ -82,6 +84,22 @@ public class GameManager : KSingleton<GameManager>
     public SO_GameConfig GetGameConfig()
     {
         return Resources.Load<SO_GameConfig>("game_config");
+    }
+
+    public void EnablePostProcess(bool enable)
+    {
+        Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().enabled = enable;
+        Camera.main.GetComponent<CameraFilterPack_NewGlitch4>().enabled = enable;
+        // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>().enabled = enable;
+    }
+
+    public void SetPostProcessValue(float value)
+    {
+        Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().Glitch = value;
+        Camera.main.GetComponent<CameraFilterPack_NewGlitch4>().__Speed = value;
+        // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>().__Speed = value;
+        Camera.main.GetComponent<CameraFilterPack_NewGlitch4>()._Fade = value;
+        // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>()._RedFade = value;
     }
 
     #endregion
