@@ -14,6 +14,7 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
 
     public void StartCountDown()
     {
+        AudioManager.instance.PlayBGM("Audio/bomb_tick");
         minigameStartTimer = GameManager.instance.GetGameConfig().minigameTriggerFrequency;
         currentCountDownTime = GameManager.instance.GetGameConfig().countDownTime;
         isPause = false;
@@ -21,6 +22,7 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
 
     public void StopCountDown()
     {
+        AudioManager.instance.StopBGM();
         isPause = true;
     }
 
@@ -49,8 +51,8 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
             KEventManager.SendNotification(KEventName.ShowMainPuzzle, false);
             GameManager.instance.StartBallonMiniGame();
         }
-
         SetPostProcessByCountDownTime();
+        SetAudioSpeedByCountDownTime();
     }
 
     void SetPostProcessByCountDownTime()
@@ -58,6 +60,18 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
         float countDownMaxLimit = GameManager.instance.GetGameConfig().countDownTime;
         float glitchValue = (countDownMaxLimit - currentCountDownTime) / countDownMaxLimit * 0.7f + 0.01f;
         GameManager.instance.SetPostProcessValue(glitchValue);
+    }
+
+    void SetAudioSpeedByCountDownTime()
+    {
+        AudioSource tickSource = AudioManager.instance.GetValidAudioSourceByAudioName("bomb_tick");
+        // ;
+        if (tickSource)
+        {
+            float countDownMaxLimit = GameManager.instance.GetGameConfig().countDownTime;
+            float pitchValue = Mathf.Clamp(countDownMaxLimit / currentCountDownTime * 0.8f, 1f, 3f);
+            tickSource.pitch = pitchValue;
+        }
     }
     
     public void ChangeCountDownTime(float time)

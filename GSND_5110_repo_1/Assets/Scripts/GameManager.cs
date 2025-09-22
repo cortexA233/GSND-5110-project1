@@ -8,6 +8,7 @@ public class GameManager : KSingleton<GameManager>
     {
         base.Awake();
         KFrameworkManager.instance.InitKFramework();
+        AudioManager.instance.Init();
         AddEventListener(KEventName.KToolTestEvent, args =>
         {
             print("!!!open mini game");
@@ -88,14 +89,14 @@ public class GameManager : KSingleton<GameManager>
 
     public void EnablePostProcess(bool enable)
     {
-        Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().enabled = enable;
+        // Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().enabled = enable;
         Camera.main.GetComponent<CameraFilterPack_NewGlitch4>().enabled = enable;
         // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>().enabled = enable;
     }
 
     public void SetPostProcessValue(float value)
     {
-        Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().Glitch = value;
+        // Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().Glitch = value;
         Camera.main.GetComponent<CameraFilterPack_NewGlitch4>().__Speed = value;
         // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>().__Speed = value;
         Camera.main.GetComponent<CameraFilterPack_NewGlitch4>()._Fade = value;
