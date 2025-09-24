@@ -103,9 +103,18 @@ namespace Minigame.BallonGame
             // show the main puzzle
             KEventManager.SendNotification(KEventName.ShowMainPuzzle, true);
             
-            // calculate the score and add extra time
-            CountDownManager.instance.ChangeCountDownTime(score * GameManager.instance.GetGameConfig()
-                .scoreToExtraTimeRatio);
+            // different results for success and failure
+            if (lives <= 0)
+            {
+                // deduct the time for penalty
+                CountDownManager.instance.ChangeCountDownTime(GameManager.instance.GetGameConfig().minigamePenaltyTime);
+            }
+            else
+            {
+                // calculate the score and add extra time
+                CountDownManager.instance.ChangeCountDownTime(score * GameManager.instance.GetGameConfig()
+                    .scoreToExtraTimeRatio);
+            }
             
             // destroy the root prefab
             GameObject.Destroy(transform.parent.gameObject);
