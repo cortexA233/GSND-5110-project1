@@ -81,7 +81,7 @@ public class AudioManager : KSingletonNoMono<AudioManager>
         musicSource.UnPause();
     }
 
-    public void SetAudioSource(AudioSource source, string path = "", bool isLoop = false, float volume = 0.25f)
+    public void SetAudioSource(AudioSource source, string path = "", bool isLoop = false, float volume = 1f)
     {
         var audio = Resources.Load<AudioClip>(path);
         if(audio == null)
