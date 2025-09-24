@@ -1,5 +1,7 @@
+using System;
 using Minigame.BallonGame;
 using UnityEngine;
+using KToolkit;
 
 public class Balloon : MonoBehaviour
 {
@@ -22,5 +24,20 @@ public class Balloon : MonoBehaviour
 
         BalloonGameManager.Instance.AddScore(rewardPoints);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.name == "ballon_bg")
+        {
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.name == "ballon_bg")
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 }

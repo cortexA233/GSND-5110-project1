@@ -1,3 +1,5 @@
+using System;
+using KToolkit;
 using Minigame.BallonGame;
 using UnityEngine;
 
@@ -24,6 +26,21 @@ namespace Minigame.BalloonGame
 
             BalloonGameManager.Instance.LoseLife(lifePenalty);
             Destroy(gameObject);
+        }
+
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.name == "ballon_bg")
+            {
+                Destroy(gameObject);
+            }
+        }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.name == "ballon_bg")
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 }
