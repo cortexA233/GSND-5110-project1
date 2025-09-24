@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 using DG.Tweening;
+using JetBrains.Annotations;
 using KToolkit;
 
 
@@ -91,5 +92,22 @@ public class AudioManager : KSingletonNoMono<AudioManager>
         source.clip = Resources.Load<AudioClip>(path);
         source.loop = isLoop;
         source.volume = volume;
+    }
+
+    [CanBeNull]
+    public AudioSource GetValidAudioSourceByAudioName(string audioName)
+    {
+        foreach(var item in effectSourcePool)
+        {
+            if(item.isPlaying && item.resource.name == audioName)
+            {
+                return item;
+            }
+        }
+        if(musicSource.isPlaying && musicSource.resource.name == audioName)
+        {
+            return musicSource;
+        }
+        return null;
     }
 }

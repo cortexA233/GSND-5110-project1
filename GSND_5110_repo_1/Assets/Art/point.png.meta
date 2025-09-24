@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 45e6244fa5004c9449291906f2b7ace3
+guid: 23f572e95c5be184d90660a598a8ea37
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5993112012373322873
-    second: panel_0
+      213: 2598405713278941328
+    second: point_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: panel_0
+      name: point_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 97
-        width: 988
-        height: 1182
+        x: 9
+        y: 7
+        width: 87
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7839c5ba06034dca0800000000000000
-      internalID: -5993112012373322873
+      spriteID: 0983652ba346f0420800000000000000
+      internalID: 2598405713278941328
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      panel_0: -5993112012373322873
+      point_0: 2598405713278941328
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

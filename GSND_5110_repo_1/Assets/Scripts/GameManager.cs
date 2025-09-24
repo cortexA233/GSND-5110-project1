@@ -8,6 +8,7 @@ public class GameManager : KSingleton<GameManager>
     {
         base.Awake();
         KFrameworkManager.instance.InitKFramework();
+        AudioManager.instance.Init();
         AddEventListener(KEventName.KToolTestEvent, args =>
         {
             print("!!!open mini game");
@@ -21,6 +22,7 @@ public class GameManager : KSingleton<GameManager>
         {
             EndCurrentGame(true);
         });
+        KUIManager.instance.CreateUI<MainMenuUI>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,6 +66,7 @@ public class GameManager : KSingleton<GameManager>
     public void EndCurrentGame(bool isSuccess=false)
     {
         // todo
+        CountDownManager.instance.StopCountDown();
         EnablePostProcess(false);
         if (isSuccess)
         {
@@ -79,6 +82,7 @@ public class GameManager : KSingleton<GameManager>
     public void BackToMainMenu()
     {
         // todo
+        KUIManager.instance.CreateUI<MainMenuUI>();
     }
 
     public SO_GameConfig GetGameConfig()
@@ -88,18 +92,13 @@ public class GameManager : KSingleton<GameManager>
 
     public void EnablePostProcess(bool enable)
     {
-        Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().enabled = enable;
         Camera.main.GetComponent<CameraFilterPack_NewGlitch4>().enabled = enable;
-        // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>().enabled = enable;
     }
 
     public void SetPostProcessValue(float value)
     {
-        Camera.main.GetComponent<CameraFilterPack_FX_Glitch2>().Glitch = value;
         Camera.main.GetComponent<CameraFilterPack_NewGlitch4>().__Speed = value;
-        // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>().__Speed = value;
         Camera.main.GetComponent<CameraFilterPack_NewGlitch4>()._Fade = value;
-        // Camera.main.GetComponent<CameraFilterPack_NewGlitch3>()._RedFade = value;
     }
 
     #endregion
