@@ -1,3 +1,4 @@
+using KToolkit;
 using Minigame.BallonGame;
 using UnityEngine;
 
@@ -22,5 +23,15 @@ public class Balloon : MonoBehaviour
 
         BalloonGameManager.Instance.AddScore(rewardPoints);
         Destroy(gameObject);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // todo
+        KDebugLogger.Cortex_DebugLog(other.gameObject.name);
+        if (other.gameObject.name == "ballon_bg")
+        {
+            Destroy(gameObject);
+        }
     }
 }

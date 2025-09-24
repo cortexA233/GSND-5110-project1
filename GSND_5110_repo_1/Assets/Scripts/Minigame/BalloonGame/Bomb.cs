@@ -1,5 +1,7 @@
+using System;
 using Minigame.BallonGame;
 using UnityEngine;
+using KToolkit;
 
 namespace Minigame.BalloonGame
 {
@@ -24,6 +26,16 @@ namespace Minigame.BalloonGame
 
             BalloonGameManager.Instance.LoseLife(lifePenalty);
             Destroy(gameObject);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            // todo
+            KDebugLogger.Cortex_DebugLog(other.gameObject.name);
+            if (other.gameObject.name == "ballon_bg")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

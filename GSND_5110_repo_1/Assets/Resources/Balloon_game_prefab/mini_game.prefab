@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3513332384917091289}
   - component: {fileID: 5239958074240397018}
+  - component: {fileID: 8432491478679573316}
   m_Layer: 0
-  m_Name: skybg_0
+  m_Name: ballon_bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,6 +88,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &8432491478679573316
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809223905044840815}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 14.56, y: 8.16}
+    newSize: {x: 14.56, y: 8.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 14.56, y: 8.16}
+  m_EdgeRadius: 0
 --- !u!1 &4016617982971935578
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,8 +594,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'TIme:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5de28b0683202d1408bc21f453e52944, type: 2}
+  m_sharedMaterial: {fileID: 1677673470629590889, guid: 5de28b0683202d1408bc21f453e52944, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -625,8 +672,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 2339538418117983124}
     m_Modifications:
     - target: {fileID: 3687178173067437364, guid: 9c8d1f22232c47746ab5922e416d8fac, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5de28b0683202d1408bc21f453e52944, type: 2}
+    - target: {fileID: 3687178173067437364, guid: 9c8d1f22232c47746ab5922e416d8fac, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1677673470629590889, guid: 5de28b0683202d1408bc21f453e52944, type: 2}
+    - target: {fileID: 3687178173067437364, guid: 9c8d1f22232c47746ab5922e416d8fac, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687178173067437364, guid: 9c8d1f22232c47746ab5922e416d8fac, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5682529356862728730, guid: 9c8d1f22232c47746ab5922e416d8fac, type: 3}
       propertyPath: m_Name
@@ -875,6 +934,18 @@ PrefabInstance:
     - target: {fileID: 1745281576038916996, guid: a48d879f4dac89047af88325d779b73d, type: 3}
       propertyPath: m_Name
       value: ScoreText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568994303910038870, guid: a48d879f4dac89047af88325d779b73d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5de28b0683202d1408bc21f453e52944, type: 2}
+    - target: {fileID: 3568994303910038870, guid: a48d879f4dac89047af88325d779b73d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1677673470629590889, guid: 5de28b0683202d1408bc21f453e52944, type: 2}
+    - target: {fileID: 3568994303910038870, guid: a48d879f4dac89047af88325d779b73d, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1430465207980989522, guid: a48d879f4dac89047af88325d779b73d, type: 3}
