@@ -22,6 +22,7 @@ public class GameManager : KSingleton<GameManager>
         {
             EndCurrentGame(true);
         });
+        KUIManager.instance.CreateUI<MainMenuUI>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -81,6 +82,7 @@ public class GameManager : KSingleton<GameManager>
     public void BackToMainMenu()
     {
         // todo
+        KUIManager.instance.CreateUI<MainMenuUI>();
     }
 
     public SO_GameConfig GetGameConfig()

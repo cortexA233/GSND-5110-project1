@@ -4,8 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameConfig", menuName = "Scriptable Objects/GameConfig")]
 public class SO_GameConfig : ScriptableObject
 {
-    [Header("countdown time / 倒计时时间")]
+    [Header("countdown time / 主游戏倒计时时间")]
     public int countDownTime;
+    
+    [Header("main game difficulty / 主游戏难度")]
+    public int mainGamePairCount;
 
     [Header("minigame score to time ratio / 小游戏分数换算时间比例")]
     public float scoreToExtraTimeRatio;
