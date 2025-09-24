@@ -15,4 +15,7 @@ public class SO_GameConfig : ScriptableObject
 
     [Header("minigame frequency / 小游戏触发频率")]
     public float minigameTriggerFrequency;
+
+    [Header("minigame failed penalty / 小游戏失败惩罚")]
+    public float minigamePenaltyTime;
 }
