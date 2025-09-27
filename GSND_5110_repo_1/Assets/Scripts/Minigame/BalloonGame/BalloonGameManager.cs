@@ -108,7 +108,7 @@ namespace Minigame.BallonGame
             {
                 // deduct the time for penalty
                 CountDownManager.instance.ChangeCountDownTime(GameManager.instance.GetGameConfig().minigamePenaltyTime);
-                KUIManager.instance.CreateUI<HintUI>("YOU LOST THE MINIGAME!", 3f);
+                KUIManager.instance.CreateUI<HintUI>("BALLONS NOT ENOUGH!", 3f);
             }
             else
             {
