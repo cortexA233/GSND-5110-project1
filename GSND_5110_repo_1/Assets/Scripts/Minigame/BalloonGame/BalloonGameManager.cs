@@ -101,19 +101,21 @@ namespace Minigame.BallonGame
             if (gameOverUI) gameOverUI.SetActive(true);
             
             // show the main puzzle
-            KEventManager.SendNotification(KEventName.ShowMainPuzzle, true);
+            // KEventManager.SendNotification(KEventName.ShowMainPuzzle, true);
             
             // different results for success and failure
             if (lives <= 0)
             {
                 // deduct the time for penalty
                 CountDownManager.instance.ChangeCountDownTime(GameManager.instance.GetGameConfig().minigamePenaltyTime);
+                KUIManager.instance.CreateUI<HintUI>("YOU LOST THE MINIGAME!", 3f);
             }
             else
             {
                 // calculate the score and add extra time
                 CountDownManager.instance.ChangeCountDownTime(score * GameManager.instance.GetGameConfig()
                     .scoreToExtraTimeRatio);
+                KUIManager.instance.CreateUI<HintUI>("YOU'VE GOT EXTRA TIME!", 3f);
             }
             
             // destroy the root prefab
