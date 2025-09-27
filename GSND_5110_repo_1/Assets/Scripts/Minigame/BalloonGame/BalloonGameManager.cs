@@ -104,7 +104,7 @@ namespace Minigame.BallonGame
             // KEventManager.SendNotification(KEventName.ShowMainPuzzle, true);
             
             // different results for success and failure
-            if (lives <= 0)
+            if (lives <= 0 || score < GameManager.instance.GetGameConfig().minigameMinimalScore)
             {
                 // deduct the time for penalty
                 CountDownManager.instance.ChangeCountDownTime(GameManager.instance.GetGameConfig().minigamePenaltyTime);

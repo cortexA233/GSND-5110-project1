@@ -49,7 +49,7 @@ public class CountDownManager : KSingletonNoMono<CountDownManager>
         {
             minigameStartTimer = GameManager.instance.GetGameConfig().minigameTriggerFrequency;
             // KEventManager.SendNotification(KEventName.ShowMainPuzzle, false);
-            GameManager.instance.StartBallonMiniGame();
+            GameManager.instance.StartBallonMiniGame(Mathf.Sqrt(GameManager.instance.GetGameConfig().countDownTime / currentCountDownTime));
         }
         SetPostProcessByCountDownTime();
         SetAudioSpeedByCountDownTime();

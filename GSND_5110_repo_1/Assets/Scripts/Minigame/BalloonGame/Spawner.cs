@@ -26,7 +26,6 @@ namespace Minigame.BalloonGame
             if (!spawning) return;
 
             float xPos = Random.Range(-spawnXRange + spawnXOffset, spawnXRange + spawnXOffset);
-            KDebugLogger.Cortex_DebugLog(xPos);
             float y = Camera.main.transform.position.y - Camera.main.orthographicSize - spawnYOffset;
             Vector3 spawnPos = new Vector3(xPos, y, 0f);
 

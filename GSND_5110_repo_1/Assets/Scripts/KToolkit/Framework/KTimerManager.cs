@@ -34,6 +34,7 @@ namespace KToolkit
             newInfo.func = func;
             newInfo.args = args;
             delayTimerList.Add(newInfo);
+            KDebugLogger.Cortex_DebugLog("delay function name: ", func.Method.Name);
         }
     }
 

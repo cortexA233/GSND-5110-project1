@@ -1,5 +1,7 @@
 using UnityEngine;
 using KToolkit;
+using Minigame.BallonGame;
+using Minigame.BalloonGame;
 
 public class GameManager : KSingleton<GameManager>
 {
@@ -59,13 +61,27 @@ public class GameManager : KSingleton<GameManager>
         KUIManager.instance.CreateUI<MainPuzzleUI>(pairCount);
     }
 
-    public void StartBallonMiniGame(){
-        Instantiate(Resources.Load<GameObject>("Balloon_game_prefab/mini_game"));
+    public void StartBallonMiniGame(float speed=1f){
+        print("minigame speed: " + speed);
+        KUIManager.instance.CreateUI<HintUI>("HIT BALLONS \n AVOID BOMBS", 2f);
+        KTimerManager.instance.AddDelayTimerFunc(2f, arg0 =>
+        {
+            var minigameObject = Instantiate(Resources.Load<GameObject>("Balloon_game_prefab/mini_game"));
+            minigameObject.transform.Find("Spawner").GetComponent<BalloonSpawner>().spawnInterval /= speed;
+            minigameObject.transform.Find("Spawner").GetComponent<BalloonSpawner>().bombChance *= speed;
+        });
+    }
+
+    public void ForceEndBallonMiniGame(){
+        // todo
+        Destroy(GameObject.Find("mini_game(Clone)"));
     }
 
     public void EndCurrentGame(bool isSuccess=false)
     {
         // todo
+        ForceEndBallonMiniGame();
+        KUIManager.instance.DestroyAllUIWithType<HintUI>();
         CountDownManager.instance.StopCountDown();
         EnablePostProcess(false);
         if (isSuccess)

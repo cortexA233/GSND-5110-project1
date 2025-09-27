@@ -21,4 +21,7 @@ public class SO_GameConfig : ScriptableObject
 
     [Header("minigame failed penalty / 小游戏失败惩罚")]
     public float minigamePenaltyTime;
+
+    [Header("minigame minimal score / 小游戏成功最低分数")]
+    public float minigameMinimalScore;
 }
